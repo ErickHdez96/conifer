@@ -1,5 +1,5 @@
-(use-modules (srfi srfi-64)
-	     (conifer green))
+(import (srfi srfi-64)
+	(conifer green))
 
 (test-runner-current (test-runner-simple))
 
