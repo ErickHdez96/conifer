@@ -28,10 +28,10 @@
     (fields
       ; Absolute offset into the file.
       offset
-      ; Pointer to the (red tree) parent (#f for root).
-      parent
       ; The green tree into which this red tree peeks.
-      green))
+      green
+      ; Pointer to the (red tree) parent (#f for root).
+      parent))
 
   ;; Creates a red tree from a green tree.
   (define make-view
@@ -44,8 +44,8 @@
 	  green-tree))
       (make-red-tree
 	0
-	#f
-	green-tree)))
+	green-tree
+	#f)))
 
   ;; Returns a list of red trees for all the children of the current red tree
   (define children
@@ -64,6 +64,6 @@
 	      (loop (+ offset (text-length child))
 		    (+ n 1)
 		    (cons (make-red-tree offset
-					 parent
-					 child)
+					 child
+					 parent)
 			  acc)))))))))
