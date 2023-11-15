@@ -34,9 +34,9 @@
     1
     ; root
     ; -- bin-expr
-    (length red-children))
+    (vector-length red-children))
 
-  (let ([bin-expr-node (car red-children)])
+  (let ([bin-expr-node (vector-ref red-children 0)])
     (test-eq
       'bin-expr
       (syntax-kind (red-tree-green bin-expr-node)))
@@ -56,8 +56,8 @@
 	; -- plus
 	; -- whitespace
 	; -- literal
-	(length bin-expr-children))
-      (let ([literal-five (car bin-expr-children)])
+	(vector-length bin-expr-children))
+      (let ([literal-five (vector-ref bin-expr-children 0)])
 	(test-eq
 	  'literal
 	  (syntax-kind (red-tree-green literal-five)))
@@ -69,18 +69,18 @@
 	    1
 	    ; literal
 	    ; -- int-number
-	    (length literal-five-children))
+	    (vector-length literal-five-children))
 	  (test-eq
 	    'int-number
-	    (syntax-kind (red-tree-green (car literal-five-children))))
+	    (syntax-kind (red-tree-green (vector-ref literal-five-children 0))))
 	  (test-eqv
 	    0
-	    (offset (car literal-five-children)))
+	    (offset (vector-ref literal-five-children 0)))
 	  (test-equal
 	    "5"
-	    (token-text (red-tree-green (car literal-five-children))))))
+	    (token-text (red-tree-green (vector-ref literal-five-children 0))))))
 
-      (let ([whitespace (cadr bin-expr-children)])
+      (let ([whitespace (vector-ref bin-expr-children 1)])
 	(test-eq
 	  'whitespace
 	  (syntax-kind (red-tree-green whitespace)))
@@ -91,7 +91,7 @@
 	  " "
 	  (token-text (red-tree-green whitespace))))
 
-      (let ([plus (caddr bin-expr-children)])
+      (let ([plus (vector-ref bin-expr-children 2)])
 	(test-eq
 	  'plus
 	  (syntax-kind (red-tree-green plus)))
@@ -102,7 +102,7 @@
 	  "+"
 	  (token-text (red-tree-green plus))))
 
-      (let ([whitespace-2 (cadddr bin-expr-children)])
+      (let ([whitespace-2 (vector-ref bin-expr-children 3)])
 	(test-eq
 	  'whitespace
 	  (syntax-kind (red-tree-green whitespace-2)))
@@ -113,7 +113,7 @@
 	  " "
 	  (token-text (red-tree-green whitespace-2))))
 
-      (let ([literal-ten (car (cddddr bin-expr-children))])
+      (let ([literal-ten (vector-ref bin-expr-children 4)])
 	(test-eq
 	  'literal
 	  (syntax-kind (red-tree-green literal-ten)))
@@ -125,13 +125,13 @@
 	    1
 	    ; literal
 	    ; -- int-number
-	    (length literal-ten-children))
+	    (vector-length literal-ten-children))
 	  (test-eq
 	    'int-number
-	    (syntax-kind (red-tree-green (car literal-ten-children))))
+	    (syntax-kind (red-tree-green (vector-ref literal-ten-children 0))))
 	  (test-eqv
 	    4
-	    (offset (car literal-ten-children)))
+	    (offset (vector-ref literal-ten-children 0)))
 	  (test-equal
 	    "10"
-	    (token-text (red-tree-green (car literal-ten-children)))))))))
+	    (token-text (red-tree-green (vector-ref literal-ten-children 0)))))))))

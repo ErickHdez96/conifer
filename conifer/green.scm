@@ -12,7 +12,9 @@
 	  token-text
 	  node?
 	  token?
-	  (rename (make-builder green-node-builder)))
+	  (rename (make-builder green-node-builder)
+		  (make-node make-green-node)
+		  (make-token make-green-token)))
   (import (rnrs base)
 	  (only (rnrs control)
 		when)
@@ -274,11 +276,15 @@
   (define finish-builder
     (lambda (b)
       (let ([current-node (builder-current-node b)])
-	(if (and (= (length (cdr current-node))
-		    1)
-		 (eq? (car current-node)
-		      'builder))
-	  (cadr (builder-current-node b))
+	(cond
+	  [(and (= (length (cdr current-node))
+		   1)
+		(eq? (car current-node)
+		     'builder))
+	   (builder-current-node-set!
+	     b
+	     (list 'builder))
+	   (cadr current-node)]
 	  (assertion-violation
 	    'finish-builder
 	    "Not all nodes have been finished")))))

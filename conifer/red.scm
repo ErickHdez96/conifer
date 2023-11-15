@@ -59,7 +59,7 @@
 		   [n 0]
 		   [acc '()])
 	  (if (= n len)
-	    (reverse acc)
+	    (list->vector (reverse acc))
 	    (let ([child (vector-ref children n)])
 	      (loop (+ offset (text-length child))
 		    (+ n 1)

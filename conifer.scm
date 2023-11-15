@@ -21,6 +21,8 @@
 	    (make-view conifer-make-view)
 
 	    ; Green tree specific functions
+	    (make-green-node conifer-make-green-node)
+	    (make-green-token conifer-make-green-token)
 	    (text-length conifer-green-text-length)
 	    (syntax-kind conifer-green-syntax-kind)
 	    (tree->string conifer-green-tree->string)

@@ -9,7 +9,7 @@ all:
 
 .PHONY: testlog
 testlog: test
-	cat *.log
+	rg "result-kind: fail" *.log -B5 -A2 --no-config
 
 .PHONY: test
 test: $(TEST_FILES)
