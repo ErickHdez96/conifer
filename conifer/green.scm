@@ -2,6 +2,7 @@
   (conifer green)
   (export start-node
 	  finish-node
+	  push-node
 	  push-token
 	  finish-builder
 	  tree->string
@@ -239,6 +240,14 @@
       (builder-current-node-set!
 	b
 	(cons syntax-kind '()))))
+
+  ;; Pushes an existing `node` as is as a child to the current node.
+  (define push-node
+    (lambda (b node)
+      (let ([current-node (builder-current-node b)])
+	(set-cdr! current-node
+		  (cons node
+			(cdr current-node))))))
 
   ;; Pushes the token '(kind . text) as a child to the active node.
   (define push-token

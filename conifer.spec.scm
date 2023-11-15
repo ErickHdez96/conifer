@@ -24,13 +24,7 @@
   root2
   (begin
     (conifer-start-node b 'root)
-    (begin
-      (conifer-start-node b 'binop)
-      (begin
-	(conifer-push-token b 'int "5")
-	(conifer-push-token b 'plus "+")
-	(conifer-push-token b 'int "10"))
-      (conifer-finish-node b))
+    (conifer-push-node b (vector-ref (conifer-green-node-children root) 0))
     (conifer-finish-node b)
     (conifer-finish-builder b)))
 

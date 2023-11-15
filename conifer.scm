@@ -14,6 +14,7 @@
 	    (green-node-builder conifer-green-node-builder)
 	    (start-node conifer-start-node)
 	    (finish-node conifer-finish-node)
+	    (push-node conifer-push-node)
 	    (push-token conifer-push-token)
 	    (finish-builder conifer-finish-builder)
 
