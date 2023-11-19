@@ -35,15 +35,23 @@
 
   ;; Creates a red tree from a green tree.
   (define make-view
-    (lambda (green-tree)
+    (lambda (green-tree . args)
       (when (not (or (node? green-tree)
 		     (token? green-tree)))
 	(assertion-violation
 	  'make-view
-	  "expected a greent tree ~A"
+	  "expected a greent tree ~a"
 	  green-tree))
+      (when (and (not (null? args))
+		 (not (integer? (car args))))
+	(assertion-violation
+	  'make-view
+	  "expected an integer offset: ~a"
+	  (car args)))
       (make-red-tree
-	0
+	(if (not (null? args))
+	  (car args)
+	  0)
 	green-tree
 	#f)))
 

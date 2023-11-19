@@ -147,13 +147,17 @@
 
   ;; Calculates the hash of the children list.
   (define children-hash
-    (lambda (t)
-      (equal-hash (map tree-hash t))))
+    (lambda (children)
+      (equal-hash (map tree-hash (if (vector? children)
+				   (vector->list children)
+				   children)))))
 
   ;; Calculates the text-length of a list of children.
   (define children-text-length
     (lambda (children)
-      (apply + (map text-length children))))
+      (apply + (map text-length (if (vector? children)
+				  (vector->list children)
+				  children)))))
 
   ;; Compares two nodes. Since all nodes and tokens should be unique (two 
   (define node=?
@@ -244,6 +248,7 @@
   ;; Pushes an existing `node` as is as a child to the current node.
   (define push-node
     (lambda (b node)
+      (assert (node? node))
       (let ([current-node (builder-current-node b)])
 	(set-cdr! current-node
 		  (cons node
